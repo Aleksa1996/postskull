@@ -1,0 +1,27 @@
+<div class="container mb-5 py-5">
+
+  <form (ngSubmit)="login()" [formGroup]="form" class="form-signin col col-md-6 offset-md-3">
+
+    <h1 class=" text-center h3 mb-3 font-weight-normal">Please log in</h1>
+
+    <div class="form-group">
+      <label for="email" class="sr-only">Email address</label>
+      <input formControlName="email" type="email" id="email" class="form-control" placeholder="Email address">
+      <small *ngIf="fieldHasErrors('email','email')" class="text-danger">Email must be in valid form!</small>
+    </div>
+
+    <div class="form-group">
+      <label for="password" class="sr-only">Password</label>
+      <input formControlName="password" type="password" id="password" class="form-control" placeholder="Password">
+      <small *ngIf="fieldHasErrors('password','required')" class="text-danger">Password is required!</small>
+      <small *ngIf="fieldHasErrors('password','minlength')" class="text-danger">
+        Password must be min 6 characters!
+      </small>
+    </div>
+
+
+    <app-form-error [errors]="form.errors"></app-form-error>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+  </form>
+</div>

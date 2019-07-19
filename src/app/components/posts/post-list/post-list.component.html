@@ -1,0 +1,17 @@
+<app-post-item *ngFor="let post of posts;" [post]="post" class="flex-column d-flex align-items-center justify-content-center">
+</app-post-item>
+
+
+<div *ngIf="posts.length == 0" class="flex-column d-flex align-items-center justify-content-center">
+    <h4>Whoops we couldn't find any post!</h4>
+</div>
+<div *ngIf="posts.length > 0" class="col col-md-12 text-center">
+    <a (click)="paginatePrev()" [class.disabled]="!links.prev" href="javascript:void(0);" class="btn btn-primary mr-3">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        Prev
+    </a>
+    <a (click)="paginateNext()" [class.disabled]="!links.next" href="javascript:void(0);" class="btn btn-primary ml-3">
+        Next
+        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+    </a>
+</div>

@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+
+    <div *ngFor="let notification of notifications" class="col col-md-12 mt-4">
+      <div class="w-auto">
+        <div class="alert alert-info m-0" role="alert">
+          <i class="fa fa-bell-o mr-3" aria-hidden="true"></i>
+          {{ notification.text }}
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="notifications.length == 0" class="col col-md-12 mt-4">
+      <div class="w-auto">
+        <div class="alert alert-info m-0" role="alert">
+          <i class="fa fa-bell-o mr-3" aria-hidden="true"></i>
+          You dont have any notifications!
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

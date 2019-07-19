@@ -1,0 +1,19 @@
+<div class="col col-md-9 comment-container my-2">
+  <hr/>
+  <div class="row">
+    <div class="float-left pl-3">
+      <a>
+        <img class="comment-img" src="https://www.w3schools.com/howto/img_avatar.png" alt="" />
+      </a>
+    </div>
+    <div class="float-right col col-md-10">
+      <form (ngSubmit)="addComment(f)" #f="ngForm">
+        <div class="form-group">
+          <textarea ngModel #inputComment="ngModel" name="body" rows="3" placeholder="Write a comment ..." class="form-control" required></textarea>
+        </div>
+        <button [disabled]="f.invalid" type="submit" class="btn btn-primary">
+          Post
+        </button>
+      </form>
+    </div>
+  </div>

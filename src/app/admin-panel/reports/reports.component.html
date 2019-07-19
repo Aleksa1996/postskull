@@ -1,0 +1,32 @@
+<div class="col col-md-12 mt-3">
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Reason</th>
+        <th scope="col">Reported</th>
+        <th scope="col">Reported by</th>
+        <th scope="col">Post</th>
+        <th scope="col">Cancel</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let report of reports;">
+
+        <td>{{ report.reason }}</td>
+        <td>{{ report.created_at | date:'mediumDate' }}</td>
+        <td>
+          <a [routerLink]="'/user/'+report.reported_by.id" href="#">{{ report.reported_by.username }}</a>
+        </td>
+        <td>
+          <a [routerLink]="'/post/'+report.post.id" href="#">View</a>
+        </td>
+        <td>
+          <button (click)="deleteReport(report.id)" class="btn btn-danger btn-sm">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>

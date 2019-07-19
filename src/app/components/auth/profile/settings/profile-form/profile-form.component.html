@@ -1,0 +1,32 @@
+<form (ngSubmit)="updateProfile()" [formGroup]="form" class="col col-md-6 offset-md-3 py-5">
+
+  <h1 class="h3 mb-3 font-weight-normal py-2">Profile settings</h1>
+
+  <div class="form-group">
+    <div class="my-3">
+      <img *ngIf="selectedImageUrl != null" class="selectedImg d-block mx-auto img-rounded img-responsive" [src]="selectedImageUrl"
+      />
+      <label *ngIf="selectedImageUrl == null" class="d-block mx-auto" for="image">
+        <i style="font-size:150px;" class="fa fa-picture-o d-block mx-auto text-center" aria-hidden="true"></i>
+      </label>
+    </div>
+    <div class="custom-file">
+      <input (change)="selectImage($event)" formControlName="image" type="file" class="custom-file-input" id="image" />
+      <label class="custom-file-label" for="image">Choose avatar</label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="description">Profile Description</label>
+    <textarea formControlName="description" id="description" class="form-control" rows="6" placeholder="Describe yourself here..."></textarea>
+    <small *ngIf="fieldHasErrors('description','required')" class="text-danger">
+      Description is required!
+    </small>
+    <small *ngIf="fieldHasErrors('description','minlength')" class="text-danger">
+      Description must be min 2 characters!
+    </small>
+  </div>
+
+  <app-form-error [errors]="form.errors"></app-form-error>
+
+  <button class="btn btn-primary" type="submit">Save changes</button>
+</form>

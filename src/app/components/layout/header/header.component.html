@@ -1,0 +1,39 @@
+<div class="fixed-top d-flex flex-column flex-md-row align-items-center p-3 px-md-5 mb-3 bg-white border-bottom box-shadow">
+  <h5 class="my-0 font-weight-normal">
+    <a class="text-dark" href="/">Post Skull</a>
+  </h5>
+  <div class="col col-md-6 mx-md-auto">
+    <form (ngSubmit)="submitSearch(f)" #f="ngForm" *ngIf="showSearchForm" class="d-flex">
+      <input ngModel name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [class.is-invalid]="f.invalid && f.touched"
+        required>
+      <a routerLink="/" (click)="showSearchForm=!showSearchForm" *ngIf="f.valid && f.submitted" class="btn btn-danger">X</a>
+    </form>
+  </div>
+  <nav class="my-2 my-md-0 mr-md-3 ">
+    <a routerLink="/" class="p-2 text-dark" href="javascript:void(0)">Home</a>
+    <a (click)="showSearchForm=!showSearchForm" class="p-2 text-dark" href="javascript:void(0)">Search</a>
+
+    <ng-container *ngIf="authService.isAuthenticated; else authButtons">
+      <a routerLink="/new" class="p-2 btn btn-outline-primary" href="javascript:void(0)">New Post</a>
+      <a *ngIf="authService.isInRole('admin')" routerLink="/admin" class="p-2 text-dark" href="javascript:void(0)">Admin Area</a>
+      <a class="p-2 text-dark text-center profile-link" href="javascript:void(0)">
+        <div ngbDropdown class="d-inline-block">
+          <a ngbDropdownToggle class="p-2 text-dark ">
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+          </a>
+          <div ngbDropdownMenu>
+            <a routerLink="/profile" class="dropdown-item">Profile</a>
+            <a routerLink="/profile/settings" class="dropdown-item">Settings</a>
+          </div>
+        </div>
+      </a>
+      <a (click)="logout($event)" class="p-2 text-dark" href="#">Logout</a>
+    </ng-container>
+
+    <ng-template #authButtons>
+      <a routerLink="/login" class="p-2 text-dark" href="#">Login</a>
+      <a routerLink="/signup" class="btn btn-outline-primary" href="#">Sign up</a>
+    </ng-template>
+
+  </nav>
+</div>

@@ -1,0 +1,33 @@
+<div class="col col-md-12 mt-3">
+  <div class="col col-md-12 my-3">
+    <a routerLink="/admin/section/new" class="btn btn-primary" href="#">New Section</a>
+  </div>
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Section name</th>
+        <th scope="col">Created</th>
+        <th scope="col">Posts</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let section of sections;">
+        <td>{{ section.name }}</td>
+        <td>{{ section.created_at | date:'medium' }}</td>
+        <td>{{ section.posts_count }}</td>
+        <td>
+          <a [routerLink]="'/admin/section/' + section.id" href="#" class="btn btn-primary btn-sm">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          </a>
+        </td>
+        <td>
+          <button (click)="deleteSection(section.id)" class="btn btn-danger btn-sm">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

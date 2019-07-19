@@ -1,0 +1,53 @@
+<!-- https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/9GAG_new_logo.svg/2000px-9GAG_new_logo.svg.png -->
+<div class="col col-md-9 mb-4">
+  <div class="card">
+    <div class="card-img-top">
+      <a [routerLink]="['/post',post.id]" href="#">
+        <img style="width:100%;" [src]="post.image" alt="">
+      </a>
+    </div>
+    <div class="card-body">
+      <div class="text-left">
+        <h5 class="card-title text-left">
+          <a [routerLink]="['/post',post.id]" href="#">{{ post.title }}</a>
+        </h5>
+        <p class="card-text">{{ post.description }}</p>
+      </div>
+      <div class="text-left my-1 py-1">
+        <a *ngFor="let tag of post.tags;" href="#" class="badge badge-pill badge-light">#{{ tag.name }}</a>
+      </div>
+      <div class="row mt-3">
+        <div class="col col-md-4 text-left">
+
+          <ng-container *ngIf="authService.isAuthenticated;else signIn">
+
+            <button *ngIf="!post.liked" [disabled]="post.isYour" (click)="like()" class="btn-success btn" placement="top" ngbTooltip="Like">
+              <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+            </button>
+            <button *ngIf="post.liked" (click)="unlike()" class="btn-danger btn" placement="top" ngbTooltip="Unlike">
+              <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+            </button>
+
+          </ng-container>
+          <ng-template #signIn>
+            <a routerLink='/login' href="#" class="btn-success btn text-white" placement="top" ngbTooltip="Like">
+              <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+            </a>
+          </ng-template>
+
+          <a [routerLink]="['/post',post.id]" class="btn-primary btn text-white" placement="top" ngbTooltip="See comments">
+            <i class="fa fa-comments-o" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="col col-md-4 d-flex align-items-center justify-content-center">
+          <small class="text-muted mx-1">{{ post.likes }} likes</small>
+          <small class="text-muted mx-1">{{ post.comments_count }} comments</small>
+        </div>
+        <div class="col col-md-4 text-right position-relative" style="overflow:hidden">
+          <input #hiddenClipboard class="hiddenClipboard" type="text" [value]="postCopyText">
+          <button (click)="copyToClipboard(hiddenClipboard)" type="button" class="btn btn-primary">Copy Link</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

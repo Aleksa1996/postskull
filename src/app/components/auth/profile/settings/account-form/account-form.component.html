@@ -1,0 +1,51 @@
+<form (ngSubmit)="accountUpdate()" [formGroup]="formAcc" class="col col-md-6 offset-md-3 pt-5">
+
+  <h1 class="h3 mb-3 font-weight-normal py-2">Account settings</h1>
+
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input formControlName="username" type="text" id="username" class="form-control" placeholder="Username">
+    <small *ngIf="fieldHasErrorsAcc('username','required')" class="text-danger">Username is required!</small>
+    <small *ngIf="fieldHasErrorsAcc('username','minlength')" class="text-danger">
+      Username must be min 2 characters!
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input formControlName="email" type="email" id="email" class="form-control" placeholder="Email">
+    <small *ngIf="fieldHasErrorsAcc('email','email')" class="text-danger">Email must be in valid format!</small>
+  </div>
+
+  <app-form-error [errors]="formAcc.errors"></app-form-error>
+
+  <button class="btn btn-primary" type="submit">Save changes</button>
+</form>
+
+<div class="col col-md-6 offset-md-3">
+
+  <a (click)="showDeleteAccountForm=!showDeleteAccountForm" style="text-decoration:none;" class="d-block my-2">
+    <small class="text-muted">Delete Account</small>
+  </a>
+
+  <form (ngSubmit)="accountDelete()" [formGroup]="formAccDel" *ngIf="showDeleteAccountForm">
+
+    <h1 class="h3 mb-3 font-weight-normal py-2">Delete account</h1>
+
+    <div class="form-group">
+      <label for="currentPassword">Current Password</label>
+      <input formControlName="currentPassword" type="password" id="currentPassword" class="form-control" placeholder="Current Password"
+      />
+      <small *ngIf="fieldHasErrorsAccDel('currentPassword','required')" class="text-danger">
+        Current password is required!
+      </small>
+      <small *ngIf="fieldHasErrorsAccDel('currentPassword','minlength')" class="text-danger">
+          Current password must be min 6 characters!
+      </small>
+    </div>
+
+    <app-form-error [errors]="formAccDel.errors"></app-form-error>
+
+    <button class="btn btn-danger" type="submit">Delete account</button>
+  </form>
+</div>

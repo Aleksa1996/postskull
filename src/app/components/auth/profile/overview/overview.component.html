@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="row">
+    <div class="col col-md-12 my-3">
+      <h5>Filter</h5>
+
+      <div *ngFor="let filter of overviewFilters;let i=index" class="custom-control custom-radio custom-control-inline">
+        <input (change)="filterChange(filter)" [checked]="i==0" type="radio" [id]="'overviewInput'+i" name="overviewInput" class="custom-control-input"
+          [value]="filter">
+        <label class="custom-control-label" [for]="'overviewInput'+i">{{ filter | titlecase }}</label>
+      </div>
+
+    </div>
+
+    <div class="col col-md-12">
+      <div class="row">
+
+        <div *ngFor="let post of overviews.posts;" class="col-md-4 my-2">
+          <div class="card">
+            <img class="card-img-top" [src]="post.image" alt="Card image cap">
+            <div class="card-body">
+              <h6>{{ post.title }}</h6>
+              <p class="card-text">{{ (post.description | slice:0:30)+'...' }}</p>
+              <p class="mb-2 text-muted">
+                {{ post.likes }} likes | {{ post.created_at | date:'medium' }}
+              </p>
+              <a [routerLink]="['/post',post.id]" href="#" class="card-link">View post</a>
+            </div>
+          </div>
+        </div>
+
+        <div *ngFor="let comment of overviews.comments;" class="col-md-4 my-2">
+          <div class="card">
+            <div class="card-body">
+              <p class="mb-2 text-muted">
+                {{ comment.likes }} likes | {{ comment.created_at | date:'medium' }}
+              </p>
+              <p class="card-text">{{ (comment.body | slice:0:30)+'...' }}</p>
+              <a [routerLink]="['/post',comment.post_id]" href="#" class="card-link">View post</a>
+            </div>
+          </div>
+        </div>
+
+        <div *ngFor="let comment_like of overviews.comment_likes;" class="col-md-6  my-2">
+          <div class="card">
+            <div class="card-body">
+              <p class="mb-2 text-muted">
+                {{ comment_like.created_at | date:'medium' }}
+              </p>
+              <p class="card-text">You have liked
+                <a [routerLink]="['/user',comment_like.comment_user.id]" href="#">
+                  {{ comment_like.comment_user.username }}
+                </a>
+                comment
+              </p>
+              <a [routerLink]="['/post',comment_like.post.id]" href="#" class="card-link">View post</a>
+            </div>
+          </div>
+        </div>
+
+        <div *ngFor="let post_like of overviews.post_likes;" class="col-md-6  my-2">
+          <div class="card">
+            <div class="card-body">
+              <p class="mb-2 text-muted">
+                {{ post_like.created_at | date:'medium' }}
+              </p>
+              <p class="card-text">You have liked
+                <a [routerLink]="['/user',post_like.post_user.id]" href="#">
+                  {{ post_like.post_user.username }}
+                </a>
+                post
+              </p>
+              <a [routerLink]="['/post',post_like.post_id]" href="#" class="card-link">View post</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

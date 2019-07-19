@@ -1,0 +1,24 @@
+<div class="modal-header">
+  <h4 class="modal-title">Report</h4>
+  <button (click)="closeModal()" type="button" class="close" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="">
+    <p>Here you can report post... Select category and click on report !</p>
+  </div>
+
+  <div *ngFor="let category of reportCategories; let i=index" class="custom-control custom-radio my-2">
+    <input [(ngModel)]="reportCategory" class="custom-control-input" type="radio" name="reportInput" id="reportInput{{ category }}"
+      [value]="category">
+    <label class="custom-control-label" for="reportInput{{ category }}">
+      {{ category }}
+    </label>
+  </div>
+
+</div>
+<div class="modal-footer">
+  <button (click)="closeModal()" type="button" class="btn btn-primary">Close</button>
+  <button (click)="reportPost()" type="button" class="btn btn-danger">Report</button>
+</div>

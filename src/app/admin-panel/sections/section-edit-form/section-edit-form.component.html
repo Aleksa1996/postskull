@@ -1,0 +1,21 @@
+<form (ngSubmit)="handleSubmit()" [formGroup]="form" class="col col-md-6 offset-md-3 pb-5">
+  <h1 class="h3 mb-3 font-weight-normal py-2">{{ isEditMode ? 'Edit section':'New section' }}</h1>
+
+  <div class="form-group">
+    <label for="inputName">Section name</label>
+    <input formControlName="name" type="text" id="inputName" class="form-control" placeholder="Section name">
+
+    <small *ngIf="fieldHasErrors('name','required')" class="text-danger">
+      Section name is required!
+    </small>
+    <small *ngIf="fieldHasErrors('name','minlength')" class="text-danger">
+      Section name must be min 2 characters!
+    </small>
+
+  </div>
+
+  <app-form-error [errors]="form.errors"></app-form-error>
+
+  <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Save':'Add' }}</button>
+  <button (click)="cancel()" type="button" class="btn btn-danger">Cancel</button>
+</form>

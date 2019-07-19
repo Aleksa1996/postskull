@@ -1,0 +1,17 @@
+<div class="modal-header">
+  <h4 class="modal-title">Edit comment</h4>
+  <button (click)="closeModal()" type="button" class="close" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form>
+    <div class="form-group">
+      <textarea [(ngModel)]="body" name="body" class="form-control" rows="4"></textarea>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button (click)="closeModal()" type="button" class="btn btn-primary">Close</button>
+  <button (click)="editComment()" type="button" class="btn btn-success">Save</button>
+</div>

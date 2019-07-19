@@ -1,0 +1,65 @@
+<form (ngSubmit)="handleSubmit()" [formGroup]="form" class="col col-md-6 offset-md-3 pb-5">
+  <h1 class="h3 mb-3 font-weight-normal py-2">{{ isEditMode ? 'Edit user':'New user'}}</h1>
+
+  <div class="form-group">
+    <div class="my-3">
+      <img *ngIf="selectedImageUrl != null" class="selectedImg d-block mx-auto img-rounded img-responsive" [src]="selectedImageUrl"
+      />
+      <label *ngIf="selectedImageUrl == null" class="d-block mx-auto" for="inputProfileAvatar">
+        <i style="font-size:150px;" class="fa fa-picture-o d-block mx-auto text-center" aria-hidden="true"></i>
+      </label>
+    </div>
+    <div class="custom-file col col-md-12">
+      <input formControlName="image" (change)="selectImage($event)" type="file" class="custom-file-input" id="inputProfileAvatar"
+      />
+      <label class="custom-file-label" for="inputProfileAvatar">Choose avatar</label>
+    </div>
+    <small *ngIf="fieldHasErrors('image','required')" class="text-danger">Avatar is required!</small>
+  </div>
+
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input formControlName="username" id="username" type="text" class="form-control" placeholder="Username">
+    <small *ngIf="fieldHasErrors('username','required')" class="text-danger">Username is required!</small>
+    <small *ngIf="fieldHasErrors('username','minlength')" class="text-danger">Username must be min 2 characters!</small>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input formControlName="email" id="email" type="email" class="form-control" placeholder="Email">
+    <small *ngIf="fieldHasErrors('email','email')" class="text-danger">Email must be in valid format!</small>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input formControlName="password" id="password" type="password" class="form-control" placeholder="Password">
+    <small *ngIf="fieldHasErrors('password','required')" class="text-danger">Password is required!</small>
+    <small *ngIf="fieldHasErrors('password','minlength')" class="text-danger">Password must be min 6 characters!</small>
+  </div>
+
+  <div class="form-group">
+    <label for="role_id">Role</label>
+    <select formControlName="role_id" id="role_id" class="form-control">
+      <option value="0">Select</option>
+      <option *ngFor="let role of roles;" [value]="role.id">{{ role.name }}</option>
+    </select>
+    <small *ngIf="fieldHasErrors('role_id','required') || fieldHasErrors('role_id','min')" class="text-danger">
+      Role is required!
+    </small>
+
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea formControlName="description" id="description" class="form-control" rows="4" placeholder="Description"></textarea>
+    <small *ngIf="fieldHasErrors('description','required')" class="text-danger">Description is required!</small>
+    <small *ngIf="fieldHasErrors('description','minlength')" class="text-danger">
+      Description must be min 2 characters!
+    </small>
+  </div>
+
+  <app-form-error [errors]="form.errors"></app-form-error>
+
+  <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Save':'Add' }}</button>
+  <button (click)="cancel()" type="button" class="btn btn-danger">Cancel</button>
+</form>

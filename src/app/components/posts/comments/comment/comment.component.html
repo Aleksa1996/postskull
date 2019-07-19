@@ -1,0 +1,52 @@
+<div class="col col-md-9 comment-container my-1">
+  <hr/>
+  <div class="row">
+    <div class="float-left pl-3 pt-1">
+      <a [routerLink]="'/user/'+comment.user.id" href="#">
+        <img class="comment-img" [src]="comment.user.image" alt="" />
+      </a>
+    </div>
+    <div class="float-right col col-md-10">
+      <div class="pb-1 d-flex row align-items-center">
+        <div class="col col-md-10">
+          <a [routerLink]="'/user/'+comment.user.id" href="#" class="mr-1">{{ comment.user.username }}</a>
+          <small class="text-muted">{{ comment.likes }} likes |</small>
+          <small class="text-muted">{{ comment.commented_on | date:'medium' }}</small>
+        </div>
+
+        <div *ngIf="authService.isInRole('admin')" class="col text-right">
+          <div ngbDropdown placement="bottom-right" class="d-inline-block">
+
+            <button class="btn btn-outline-primary btn-sm" id="dropdownBasic1" ngbDropdownToggle>
+              <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button type="button" (click)="openEditModal()" class="dropdown-item">Edit</button>
+              <button type="button" (click)="openDeleteModal()" class="dropdown-item">Delete</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <p class="comment-paragraph">{{ comment.body }}</p>
+
+      <ng-container *ngIf="authService.isAuthenticated;else signIn">
+        <button *ngIf="!comment.liked" [disabled]="comment.isYour" (click)="like()" class="btn-success btn-sm btn" placement="top"
+          ngbTooltip="Like">
+          <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+        </button>
+        <button *ngIf="comment.liked" (click)="unlike()" class="btn-danger btn-sm btn" placement="top" ngbTooltip="Unlike">
+          <i class="fa fa-thumbs-o-down" aria-hidden="true"></i>
+        </button>
+      </ng-container>
+
+      <ng-template #signIn>
+        <a routerLink='/login' href="#" class="btn-success btn text-white" placement="top" ngbTooltip="Like">
+          <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+        </a>
+      </ng-template>
+
+    </div>
+  </div>
+
+</div>

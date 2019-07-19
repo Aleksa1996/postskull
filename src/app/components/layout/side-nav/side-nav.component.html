@@ -1,0 +1,14 @@
+<div class="col col-md-3 position-fixed side-nav">
+  <div class="card">
+    <div class="card-header">
+      Sections
+    </div>
+    <div class="list-group list-group-flush">
+      <!-- active -->
+      <a *ngFor="let section of sections;" routerLink="/" [queryParams]="{fType:'section',fValue:section.id}" href="#" class="list-group-item list-group-item-action">
+        {{ section.name }}
+      </a>
+
+    </div>
+  </div>
+</div>

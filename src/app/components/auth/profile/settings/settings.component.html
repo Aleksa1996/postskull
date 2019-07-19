@@ -1,0 +1,17 @@
+<ngb-tabset>
+  <ngb-tab title="Account">
+    <ng-template ngbTabContent>
+      <app-account-form (userChange)="getUser()" [user]="user"></app-account-form>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="Password">
+    <ng-template ngbTabContent>
+      <app-password-form [user]="user"></app-password-form>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="Profile">
+    <ng-template ngbTabContent>
+      <app-profile-form (userChange)="getUser()" [user]="user"></app-profile-form>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>
